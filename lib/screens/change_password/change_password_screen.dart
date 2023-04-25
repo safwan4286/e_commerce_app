@@ -30,7 +30,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   bottom: MediaQuery.of(context).viewInsets.bottom),
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                     EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

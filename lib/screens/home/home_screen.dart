@@ -43,31 +43,36 @@ class HomeScreen extends StatelessWidget {
             ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : ListView(
-                children: [
-                  BannerWidget(bannerListModel: homeController.bannerListModel),
-                  Container(
-                      padding: const EdgeInsets.only(left: 20),
-                      alignment: Alignment.centerLeft,
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      child: const MyTitleTextWidget(
-                          text: 'Categories', color: Colors.blue)),
-                  Obx(() => CategoryListWidget(
-                      homeController: homeController,
-                      selectedIndex: homeController.selectedIndex,
-                      categoryModel: homeController.categoryModel.value)),
-                  Container(
-                      padding: const EdgeInsets.only(left: 20),
-                      alignment: Alignment.centerLeft,
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      child: const MyTitleTextWidget(
-                        text: 'Products',
-                        color: Colors.blue,
-                      )),
-                  Obx(() => ProductListWidget(
-                        productList: homeController.selectedProduct,
-                      )),
-                ],
+            : SafeArea(
+                child: ListView(
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                    BannerWidget(
+                        bannerListModel: homeController.bannerListModel),
+                    Container(
+                        padding: const EdgeInsets.only(left: 20),
+                        alignment: Alignment.centerLeft,
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        child: const MyTitleTextWidget(
+                            text: 'Categories', color: Colors.blue)),
+                    Obx(() => CategoryListWidget(
+                        homeController: homeController,
+                        selectedIndex: homeController.selectedIndex,
+                        categoryModel: homeController.categoryModel.value)),
+                    Container(
+                        padding: const EdgeInsets.only(left: 20),
+                        alignment: Alignment.centerLeft,
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        child: const MyTitleTextWidget(
+                          text: 'Products',
+                          color: Colors.blue,
+                        )),
+                    Obx(() => ProductListWidget(
+                          homeController: homeController,
+                          productList: homeController.selectedProduct,
+                        )),
+                  ],
+                ),
               )));
   }
 }

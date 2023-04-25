@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:user_login/models/product_model.dart';
 import 'package:get/get.dart';
+import 'package:user_login/screens/home/controller/home_controller.dart';
 
 class ProductListWidget extends StatelessWidget {
-  ProductListWidget({super.key, required this.productList});
+  ProductListWidget(
+      {super.key,
+      required this.productList,
+      required this.homeController,
+      this.selectedIndex});
   List<ProductList>? productList;
+  HomeController homeController;
+  int? selectedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +57,13 @@ class ProductListWidget extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           )),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            homeController.getProductId(item?.productId ?? '');
+                            selectedIndex = index;
+                          },
                           icon: Icon(
                             Icons.favorite,
+                            color: Colors.white,
                           ))
                     ],
                   ),

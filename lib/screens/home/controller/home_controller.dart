@@ -16,6 +16,7 @@ class HomeController extends GetxController {
   RxBool isCategoryLoading = false.obs;
   RxInt selectedIndex = 0.obs;
   RxString categoryId = '1'.obs;
+  RxString productId = ''.obs;
   // final CarouselController _carouselController = CarouselController();
 
   @override
@@ -24,6 +25,11 @@ class HomeController extends GetxController {
     categoryApi();
     productApi();
     super.onInit();
+  }
+
+  void getProductId(String id) {
+    productId.value = id;
+    wishList();
   }
 
   void categoryById(String id) {
@@ -110,5 +116,22 @@ class HomeController extends GetxController {
 
       Get.snackbar(json['message'], '');
     }
+  }
+
+  void wishList() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String userId = preferences.getString('user_id') ?? '';
+
+    final Uri uri =
+        Uri.parse('https://akashsir.in/myapi/ecom1/api/api-wishlist-add.php');
+    final body = {
+      'user_id': userId,
+      'product_id': productId.value,
+    };
+    final response = await http.post(uri, body: body);
+    print(response.statusCode);
+    print(response.body);
+    final json = jsonDecode(response.body);
+    int flag = int.parse(json['flag']);
   }
 }
